@@ -10,14 +10,12 @@ class MultiArmedBanditBernoulli(gym.Env):
         self.action_space = gym.spaces.Discrete(len(arms_mean))
         # the only obs is 0
         self.observation_space = gym.spaces.Discrete(1)
-        self.rng = np.random.default_rng()
 
         self.regret = 0
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed, options=options)
-        self.rng = np.random.default_rng(seed)
-        # we also need to reset regret manually
+        # we need to reset regret manually
         self.regret = 0
 
         return 0, {}
@@ -27,7 +25,7 @@ class MultiArmedBanditBernoulli(gym.Env):
 
         # calc reward
         mean = self.arms_mean[action]
-        reward = self.rng.binomial(n=1, p=mean)
+        reward = self.np_random.binomial(n=1, p=mean)
 
         # info for calculation of the regret
         opt_mean = self.arms_mean[: self.num_arms].max()

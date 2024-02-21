@@ -19,13 +19,11 @@ class ContextualBandit(gym.Env):
         self.observation_space = gym.spaces.Box(
             low=-1e20, high=1e20, shape=(context_dim,), dtype=np.float64
         )
-        self.rng = np.random.default_rng()
 
         self.regret = 0
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed, options=options)
-        self.rng = np.random.default_rng(seed)
         self.context = self._get_new_context()
         # we also need to reset regret manually
         self.regret = 0
@@ -33,7 +31,9 @@ class ContextualBandit(gym.Env):
         return self.context, {}
 
     def _get_new_context(self):
-        return self.rng.normal(size=(self.context_dim,)) / np.sqrt(self.context_dim)
+        return self.np_random.normal(size=(self.context_dim,)) / np.sqrt(
+            self.context_dim
+        )
 
     def step(self, action: int):
         assert action < self.num_arms, (action, self.num_arms)
@@ -42,7 +42,7 @@ class ContextualBandit(gym.Env):
 
         # calc reward
         mean = all_means[action]
-        reward = self.rng.normal(loc=mean, scale=1)
+        reward = self.np_random.normal(loc=mean, scale=1)
 
         # info for calculation of the regret
         opt_mean = all_means.max()
