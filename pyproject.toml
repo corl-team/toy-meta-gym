@@ -1,0 +1,85 @@
+[project]
+name = "toymeta"
+description = "Toy meta-reinforcement learning environments to test algorithms implementations"
+readme = "README.md"
+requires-python =">=3.9"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Alexander Nikulin", email = "a.p.nikulin@tinkoff.ai"},
+]
+dynamic = ["version"]
+
+keywords = [
+    "reinforcement learning",
+    "meta-reinforcement learning",
+    "gridworld",
+    "dark room"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: Apache Software License",
+]
+
+dependencies = [
+    "gymnasium>=0.29.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.1.6",
+    "pre-commit>=3.3.3",
+    "pyright>=1.1.347",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "toymeta.__version__"}
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+# disabling rules conflicting with the formatter (from the docs)
+select = ["E", "F", "I001", "RUF100"]
+# TODO: remove F401 from ignored later
+ignore = [
+    "W191", "E111", "E114",
+    "E117", "D206", "D300",
+    "Q000", "Q001", "Q002",
+    "Q003", "COM812", "COM819",
+    "ISC001", "ISC002", "F401"
+]
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+
+[tool.ruff.isort]
+# see https://github.com/astral-sh/ruff/issues/8571
+known-third-party = ["wandb"]
+
+
+[tool.pyright]
+include = ["src/toymeta"]
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+]
+
+reportMissingImports = "none"
+reportMissingTypeStubs = false
+reportMissingModuleSource = false
+
+pythonVersion = "3.10"
+pythonPlatform = "All"
