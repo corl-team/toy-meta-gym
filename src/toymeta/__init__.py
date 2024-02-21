@@ -50,3 +50,19 @@ register(
     max_episode_steps=20,
     kwargs={"size": 3, "random_start": True},
 )
+
+register(
+    id="BernoulliBandit",
+    entry_point="toymeta.bernoulli_bandit:MultiArmedBanditBernoulli",
+)
+
+register(
+    id="HAD-Dark-Room",
+    entry_point="toymeta.had_dark_room:HAD_DarkRoom",
+    max_episode_steps=20,
+    kwargs={"terminate_on_goal": True},
+)
+
+register(
+    id="ContextualBandit", entry_point="toymeta.contextual_bandit:ContextualBandit"
+)

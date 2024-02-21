@@ -6,6 +6,7 @@ requires-python =">=3.9"
 license = {file = "LICENSE"}
 authors = [
   {name = "Alexander Nikulin", email = "a.p.nikulin@tinkoff.ai"},
+  {name = "Viacheslav Sinii", email = "v.siniy@tinkoff.ai"}
 ]
 dynamic = ["version"]
 
@@ -13,7 +14,10 @@ keywords = [
     "reinforcement learning",
     "meta-reinforcement learning",
     "gridworld",
-    "dark room"
+    "dark room",
+    "bandit",
+    "bernoulli bandit",
+    "contextual bandit"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -29,7 +33,8 @@ classifiers = [
 ]
 
 dependencies = [
-    "gymnasium>=0.29.0"
+    "gymnasium>=0.29.0",
+    "numba>=0.59.0"
 ]
 
 [project.optional-dependencies]
