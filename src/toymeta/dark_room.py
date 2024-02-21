@@ -9,7 +9,7 @@ def all_goals(grid_size):
 
 
 class DarkRoom(gym.Env):
-    metadata = {"render_mode": ["rgb_array"], "render_fps": 1}
+    metadata = {"render_modes": ["rgb_array"], "render_fps": 1}
 
     def __init__(self, size=9, goal=None, random_start=True, terminate_on_goal=False, render_mode="rgb_array"):
         self.size = size
