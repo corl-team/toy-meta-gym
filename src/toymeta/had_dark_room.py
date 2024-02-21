@@ -15,9 +15,6 @@ import numpy as np
 from gymnasium import spaces
 from numba import njit
 
-# gym warnings are annoying
-warnings.filterwarnings("ignore")
-
 
 def get_action_sequences(num_actions: int, seq_len: int):
     seqs = list(product(np.arange(num_actions), repeat=seq_len))
